@@ -34,6 +34,7 @@ class PostsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        postsViewModel.fetchPosts(subreddit: nil)
         setupNavigationBar()
         setupView()
     }
