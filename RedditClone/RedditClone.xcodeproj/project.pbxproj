@@ -22,6 +22,7 @@
 		012FB0B42328703A005F69B9 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012FB0B32328703A005F69B9 /* PostTableViewCell.swift */; };
 		012FB0B723287451005F69B9 /* PostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012FB0B623287451005F69B9 /* PostsView.swift */; };
 		012FB0B923287788005F69B9 /* PostsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012FB0B823287788005F69B9 /* PostsModel.swift */; };
+		012FB0BC23294812005F69B9 /* PostsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012FB0BB23294812005F69B9 /* PostsService.swift */; };
 		A29254399E28EFFFB376121B /* Pods_RedditClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69CBF1E40203E714AE4EBA7D /* Pods_RedditClone.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +65,7 @@
 		012FB0B32328703A005F69B9 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		012FB0B623287451005F69B9 /* PostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsView.swift; sourceTree = "<group>"; };
 		012FB0B823287788005F69B9 /* PostsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsModel.swift; sourceTree = "<group>"; };
+		012FB0BB23294812005F69B9 /* PostsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsService.swift; sourceTree = "<group>"; };
 		69CBF1E40203E714AE4EBA7D /* Pods_RedditClone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RedditClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B3CB537BAC48F357B26F66D /* Pods-RedditClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedditClone.debug.xcconfig"; path = "Target Support Files/Pods-RedditClone/Pods-RedditClone.debug.xcconfig"; sourceTree = "<group>"; };
 		A3F3A667715DB624C32CB6A6 /* Pods-RedditClone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedditClone.release.xcconfig"; path = "Target Support Files/Pods-RedditClone/Pods-RedditClone.release.xcconfig"; sourceTree = "<group>"; };
@@ -120,6 +122,7 @@
 		012FB0732327F9FA005F69B9 /* RedditClone */ = {
 			isa = PBXGroup;
 			children = (
+				012FB0BA232947FA005F69B9 /* Services */,
 				012FB0B523287446005F69B9 /* Views */,
 				012FB0B22328702B005F69B9 /* Cells */,
 				012FB0AF23286BEE005F69B9 /* DataManagers */,
@@ -218,6 +221,14 @@
 				012FB0B623287451005F69B9 /* PostsView.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		012FB0BA232947FA005F69B9 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				012FB0BB23294812005F69B9 /* PostsService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		3EDB1063B711695B09B60CB6 /* Pods */ = {
@@ -417,6 +428,7 @@
 				012FB0AE232869E9005F69B9 /* UINavigationController+Extensions.swift in Sources */,
 				012FB0B123286BFE005F69B9 /* PostsDataManager.swift in Sources */,
 				012FB0B923287788005F69B9 /* PostsModel.swift in Sources */,
+				012FB0BC23294812005F69B9 /* PostsService.swift in Sources */,
 				012FB0B42328703A005F69B9 /* PostTableViewCell.swift in Sources */,
 				012FB0772327F9FA005F69B9 /* PostsViewController.swift in Sources */,
 				012FB0A923283C97005F69B9 /* MainCoordinator.swift in Sources */,

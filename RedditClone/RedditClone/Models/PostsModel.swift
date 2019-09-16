@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct RedditResponse: Decodable {
+public struct RedditResponse: Decodable {
     let kind: String
     let data: PostResponse
     

@@ -13,21 +13,22 @@ public protocol PostViewable {
 }
 
 class PostsViewModel: PostViewable {
-    let url = "https://www.reddit.com/.json"
+    let postsService: PostsServicable
     var posts: RedditResponse?
     
+    init(postsService: PostsServicable) {
+        self.postsService = postsService
+    }
+    
+    public convenience init() {
+        self.init(postsService: PostsService())
+    }
+    
     public func fetchPosts(subreddit: String?) {
-        URLSession.shared.dataTask(with: URL(string: url)!) { [weak self] (data, urlResponse, _) in
-            if let data = data,
-                let jsonString = String(data: data, encoding: .utf8) {
-                
-                let decoder = JSONDecoder()
-                do {
-                    self?.posts = try decoder.decode(RedditResponse.self, from: jsonString.data(using: .utf8)!)
-                } catch {
-                    print(error)
-                }
-            }
-        }.resume()
+        if let subreddit = subreddit {
+            posts = postsService.getSubredditPosts(subreddit: subreddit)
+        } else {
+            posts = postsService.getHomePosts()
+        }
     }
 }
