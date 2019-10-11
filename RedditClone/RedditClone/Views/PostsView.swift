@@ -28,5 +28,6 @@ public class PostsView: UIView {
         tableView.snp.makeConstraints { make in
             make.leading.top.trailing.bottom.equalToSuperview()
         }
+        tableView.rowHeight = UITableView.automaticDimension
     }
 }

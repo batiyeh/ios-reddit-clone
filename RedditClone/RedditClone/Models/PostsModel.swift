@@ -18,7 +18,7 @@ public struct RedditResponse: Decodable {
     }
 }
 
-struct PostResponse: Decodable {
+public struct PostResponse: Decodable {
     let posts: [PostModel]
     
     enum CodingKeys: String, CodingKey {
@@ -26,19 +26,27 @@ struct PostResponse: Decodable {
     }
 }
 
-struct PostModel: Decodable {
+public struct PostModel: Decodable {
     let kind: String
     let data: SinglePostModel
 }
 
-struct SinglePostModel: Decodable {
+public struct SinglePostModel: Decodable {
     let title: String
     let subreddit: String
     let url: String
+    let id: String
+    let thumbnail: String?
+    let thumbHeight: Int?
+    let thumbWidth: Int?
     
-    enum CodingKeys: CodingKey {
+    enum CodingKeys: String, CodingKey {
         case title
         case subreddit
         case url
+        case id
+        case thumbnail
+        case thumbHeight = "thumbnail_height"
+        case thumbWidth = "thumbnail_width"
     }
 }

@@ -5,4 +5,11 @@ project './RedditClone/RedditClone.xcodeproj'
 
 target 'RedditClone' do
     pod 'SnapKit', '~> 5.0.0'
+    pod 'RxSwift', '~> 5'
+    pod 'RxCocoa', '~> 5'
+end
+
+target 'RedditCloneTests' do
+    pod 'RxBlocking', '~> 5'
+    pod 'RxTest', '~> 5'
 end

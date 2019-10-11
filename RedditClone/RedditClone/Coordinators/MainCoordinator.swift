@@ -6,14 +6,14 @@
 //  Copyright © 2019 Brian Atiyeh. All rights reserved.
 //
 
-import Foundation
+import SafariServices
 import UIKit
 
-public protocol CoordinatorDelegate {
-    func showPostURL()
+public protocol MainCoordinatorDelegate: class {
+    func showPost(url: String)
 }
 
-class MainCoordinator: Coordinator, CoordinatorDelegate {
+class MainCoordinator: Coordinator, MainCoordinatorDelegate {
     var childCoordinators = [Coordinator]()
     var navigationController: UINavigationController
     
@@ -22,11 +22,14 @@ class MainCoordinator: Coordinator, CoordinatorDelegate {
     }
     
     func start() {
-        let vc = PostsViewController()
-        navigationController.pushViewController(vc, animated: false)
+        let postsViewController = PostsViewController()
+        postsViewController.delegate = self
+        navigationController.pushViewController(postsViewController, animated: false)
     }
     
-    public func showPostURL() {
-        print("Show the post!")
+    public func showPost(url: String) {
+        guard let url = URL(string: url) else { return }
+        let sfViewController = SFSafariViewController(url: url)
+        navigationController.pushViewController(sfViewController, animated: true)
     }
 }

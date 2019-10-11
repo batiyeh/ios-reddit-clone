@@ -8,42 +8,37 @@
 
 import Foundation
 
+public typealias ServiceCompletion = (_ response: RedditResponse) -> Void
+
 public protocol PostsServicable {
-    func getHomePosts() -> RedditResponse?
-    func getSubredditPosts(subreddit: String) -> RedditResponse?
+    func getHomePosts(completionHandler: @escaping ServiceCompletion)
+    func getSubredditPosts(subreddit: String, completionHandler: @escaping ServiceCompletion)
 }
 
 class PostsService: PostsServicable {
     let baseUrl = "https://www.reddit.com/"
     let json = ".json"
     
-    func getHomePosts() -> RedditResponse? {
-        var response: RedditResponse? = nil
+    func getHomePosts(completionHandler: @escaping ServiceCompletion) {
         if let url = URL(string: baseUrl + json) {
-            URLSession.shared.dataTask(with: url) { (data, urlResponse, _) in
-                if let data = data,
-                    let jsonString = String(data: data, encoding: .utf8) {
-                    
-                    let decoder = JSONDecoder()
-                    response = try? decoder.decode(RedditResponse.self, from: jsonString.data(using: .utf8)!)
-                }
-            }.resume()
+            fetchData(url: url, completionHandler: completionHandler)
         }
-        return response
     }
     
-    func getSubredditPosts(subreddit: String) -> RedditResponse? {
-        var response: RedditResponse? = nil
+    func getSubredditPosts(subreddit: String, completionHandler: @escaping ServiceCompletion) {
         if let url = URL(string: baseUrl + subreddit + json) {
-            URLSession.shared.dataTask(with: url) { (data, urlResponse, _) in
-                if let data = data,
-                    let jsonString = String(data: data, encoding: .utf8) {
-                    
-                    let decoder = JSONDecoder()
-                    response = try? decoder.decode(RedditResponse.self, from: jsonString.data(using: .utf8)!)
-                }
-                }.resume()
+            fetchData(url: url, completionHandler: completionHandler)
         }
-        return response
+    }
+    
+    func fetchData(url: URL, completionHandler: @escaping ServiceCompletion) {
+        URLSession.shared.dataTask(with: url) { (data, urlResponse, _) in
+            if let data = data,
+                let jsonString = String(data: data, encoding: .utf8) {
+                if let response = try? JSONDecoder().decode(RedditResponse.self, from: jsonString.data(using: .utf8)!) {
+                    completionHandler(response)
+                }
+            }
+        }.resume()
     }
 }

@@ -6,15 +6,16 @@
 //  Copyright © 2019 Brian Atiyeh. All rights reserved.
 //
 
-import Foundation
+import RxCocoa
 
 public protocol PostViewable {
+    var posts: BehaviorRelay<[PostModel]> { get }
     func fetchPosts(subreddit: String?)
 }
 
 class PostsViewModel: PostViewable {
+    public var posts = BehaviorRelay<[PostModel]>(value: [])
     let postsService: PostsServicable
-    var posts: RedditResponse?
     
     init(postsService: PostsServicable) {
         self.postsService = postsService
@@ -26,9 +27,13 @@ class PostsViewModel: PostViewable {
     
     public func fetchPosts(subreddit: String?) {
         if let subreddit = subreddit {
-            posts = postsService.getSubredditPosts(subreddit: subreddit)
+            postsService.getSubredditPosts(subreddit: subreddit, completionHandler: setPosts)
         } else {
-            posts = postsService.getHomePosts()
+            postsService.getHomePosts(completionHandler: setPosts)
         }
+    }
+    
+    private func setPosts(response: RedditResponse) {
+        posts.accept(response.data.posts)
     }
 }

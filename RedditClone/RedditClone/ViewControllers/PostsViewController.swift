@@ -6,21 +6,24 @@
 //  Copyright © 2019 Brian Atiyeh. All rights reserved.
 //
 
+import RxSwift
 import SnapKit
 import UIKit
 
 class PostsViewController: UIViewController {
+    public weak var delegate: MainCoordinatorDelegate?
     let postsViewModel: PostViewable
     let postsDataManager: PostsTableViewDataManager
-    let postsView: PostsView
+    let postsView = PostsView()
+    private let disposeBag = DisposeBag()
     
     init(postsViewModel: PostViewable,
          postsDataManager: PostsTableViewDataManager) {
         self.postsViewModel = postsViewModel
         self.postsDataManager = postsDataManager
-        self.postsView = PostsView()
         self.postsDataManager.setup(tableView: postsView.tableView)
         super.init(nibName: nil, bundle: nil)
+        self.postsDataManager.delegate = self
     }
     
     public convenience init() {
@@ -34,13 +37,22 @@ class PostsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        postsObservable()
         postsViewModel.fetchPosts(subreddit: nil)
         setupNavigationBar()
         setupView()
     }
     
+    private func postsObservable() {
+        postsViewModel.posts
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] posts in
+                self?.postsDataManager.setPosts(posts: posts)
+        }).disposed(by: disposeBag)
+    }
+    
     private func setupNavigationBar() {
-        title = "Reddit Clone"
+        title = "Reddit Home"
         navigationController?.styleNavigationBarTitle()
     }
     
@@ -50,6 +62,12 @@ class PostsViewController: UIViewController {
         postsView.snp.makeConstraints { make in
             make.leading.top.trailing.bottom.equalToSuperview()
         }
+    }
+}
+
+extension PostsViewController: PostsTableViewDelegate {
+    func postTapped(url: String) {
+        delegate?.showPost(url: url)
     }
 }
 

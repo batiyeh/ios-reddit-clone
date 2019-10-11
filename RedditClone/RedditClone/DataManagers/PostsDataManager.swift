@@ -6,12 +6,18 @@
 //  Copyright © 2019 Brian Atiyeh. All rights reserved.
 //
 
-import Foundation
+import RxSwift
 import UIKit
 
+public protocol PostsTableViewDelegate: class {
+    func postTapped(url: String)
+}
+
 class PostsTableViewDataManager: NSObject, UITableViewDelegate, UITableViewDataSource {
+    public weak var delegate: PostsTableViewDelegate?
     private weak var tableView: UITableView?
-    private var results: [String] = ["Hello"]
+    private var posts: [PostModel] = []
+    private let disposeBag = DisposeBag()
     
     public override init() {
         super.init()
@@ -26,16 +32,18 @@ class PostsTableViewDataManager: NSObject, UITableViewDelegate, UITableViewDataS
         tableView.delegate = self
     }
     
-    public func setResults(results: [String]) {
-        self.results = results
+    public func setPosts(posts: [PostModel]) {
+        self.posts = posts
+        tableView?.reloadData()
     }
     
     public func clearResults() {
-        results = []
+        posts = []
+        tableView?.reloadData()
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return results.count
+        return posts.count
     }
     
     public func numberOfSections(in tableView: UITableView) -> Int {
@@ -48,8 +56,15 @@ class PostsTableViewDataManager: NSObject, UITableViewDelegate, UITableViewDataS
                                  for: indexPath) as? PostTableViewCell
             else { return PostTableViewCell() }
         
-        let string = results[indexPath.row]
-        cell.configure(title: string)
+        let post = posts[indexPath.row]
+        cell.configure(post: post.data)
+        cell.tapped.subscribe(onNext: { [weak self] _ in
+            self?.delegate?.postTapped(url: post.data.url)
+        }).disposed(by: disposeBag)
         return cell
+    }
+    
+    public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }
