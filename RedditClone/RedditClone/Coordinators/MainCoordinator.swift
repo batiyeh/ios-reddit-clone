@@ -30,6 +30,6 @@ class MainCoordinator: Coordinator, MainCoordinatorDelegate {
     public func showPost(url: String) {
         guard let url = URL(string: url) else { return }
         let sfViewController = SFSafariViewController(url: url)
-        navigationController.pushViewController(sfViewController, animated: true)
+        navigationController.present(sfViewController, animated: true)
     }
 }

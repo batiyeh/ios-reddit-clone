@@ -67,26 +67,9 @@ class PostTableViewCell: UITableViewCell {
     public func configure(post: SinglePostModel, isTappable: Bool = true) {
         titleLabel.text = post.title
         subredditLabel.text = "r/\(post.subreddit)"
-        if let thumbnail = post.thumbnail {
-            downloadImage(from: thumbnail)
-        }
         
         if isTappable {
             addTapGesture()
-        }
-    }
-    
-    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
-    }
-    
-    func downloadImage(from urlString: String?) {
-        guard let urlString = urlString, let url = URL(string: urlString) else { return }
-        getData(from: url) { [weak self] data, response, error in
-            guard let data = data, error == nil else { return }
-            DispatchQueue.main.async() {
-                self?.thumbnail.image = UIImage(data: data)
-            }
         }
     }
     

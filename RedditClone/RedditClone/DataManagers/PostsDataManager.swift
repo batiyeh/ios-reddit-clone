@@ -58,6 +58,10 @@ class PostsTableViewDataManager: NSObject, UITableViewDelegate, UITableViewDataS
         
         let post = posts[indexPath.row]
         cell.configure(post: post.data)
+        if let thumbnail = post.data.thumbnail {
+            cell.thumbnail.downloadImageFrom(urlString: thumbnail, contentMode: .scaleAspectFit)
+        }
+        
         cell.tapped.subscribe(onNext: { [weak self] _ in
             self?.delegate?.postTapped(url: post.data.url)
         }).disposed(by: disposeBag)

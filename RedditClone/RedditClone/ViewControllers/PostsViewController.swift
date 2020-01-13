@@ -15,6 +15,7 @@ class PostsViewController: UIViewController {
     let postsViewModel: PostViewable
     let postsDataManager: PostsTableViewDataManager
     let postsView = PostsView()
+    var popularSubredditsVC: PopularSubredditsViewController?
     private let disposeBag = DisposeBag()
     
     init(postsViewModel: PostViewable,
@@ -39,7 +40,10 @@ class PostsViewController: UIViewController {
         super.viewDidLoad()
         postsObservable()
         postsViewModel.fetchPosts(subreddit: nil)
-        setupNavigationBar()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         setupView()
     }
     
@@ -57,10 +61,32 @@ class PostsViewController: UIViewController {
     }
     
     private func setupView() {
+        setupNavigationBar()
         view.backgroundColor = .white
+        
         view.addSubview(postsView)
-        postsView.snp.makeConstraints { make in
-            make.leading.top.trailing.bottom.equalToSuperview()
+        self.postsView.searchTextField.delegate = self
+        postsView.snp.makeConstraints { (make) in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.leading.trailing.bottom.equalToSuperview()
+        }
+    }
+    
+    private func setupPopularSubredditsView() {
+        popularSubredditsVC = PopularSubredditsViewController()
+        if let popularSubreddits = popularSubredditsVC {
+            add(childViewController: popularSubreddits)
+            popularSubreddits.view.snp.makeConstraints { (make) in
+                make.top.equalTo(postsView.searchTextField.snp.bottom).offset(10)
+                make.leading.trailing.bottom.equalToSuperview()
+            }
+        }
+    }
+    
+    private func removePopularSubredditsView() {
+        if let popularSubreddits = popularSubredditsVC {
+            remove(childViewController: popularSubreddits)
+            popularSubredditsVC = nil
         }
     }
 }
@@ -71,3 +97,12 @@ extension PostsViewController: PostsTableViewDelegate {
     }
 }
 
+extension PostsViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        setupPopularSubredditsView()
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        removePopularSubredditsView()
+    }
+}
