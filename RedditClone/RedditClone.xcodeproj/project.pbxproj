@@ -143,8 +143,7 @@
 		012FB0732327F9FA005F69B9 /* RedditClone */ = {
 			isa = PBXGroup;
 			children = (
-				01CF99F723CD2AB6007457B8 /* Endpoints */,
-				012FB0BA232947FA005F69B9 /* Services */,
+				0162DC7B23CD69F4006CE5B0 /* Networking */,
 				012FB0B523287446005F69B9 /* Views */,
 				012FB0B22328702B005F69B9 /* Cells */,
 				012FB0AF23286BEE005F69B9 /* DataManagers */,
@@ -255,9 +254,18 @@
 			isa = PBXGroup;
 			children = (
 				012FB0BB23294812005F69B9 /* RedditService.swift */,
-				01CF99F523CC0B28007457B8 /* Networking.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		0162DC7B23CD69F4006CE5B0 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				01CF99F523CC0B28007457B8 /* Networking.swift */,
+				012FB0BA232947FA005F69B9 /* Services */,
+				01CF99F723CD2AB6007457B8 /* Endpoints */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 		01CF99F723CD2AB6007457B8 /* Endpoints */ = {
