@@ -9,12 +9,12 @@
 import RxCocoa
 
 public protocol PostViewable {
-    var posts: BehaviorRelay<[PostModel]> { get }
+    var posts: BehaviorRelay<[Post]> { get }
     func fetchPosts(subreddit: String?)
 }
 
 class PostsViewModel: PostViewable {
-    public var posts = BehaviorRelay<[PostModel]>(value: [])
+    public var posts = BehaviorRelay<[Post]>(value: [])
     let postsService: PostsServicable
     
     init(postsService: PostsServicable) {
@@ -22,7 +22,7 @@ class PostsViewModel: PostViewable {
     }
     
     public convenience init() {
-        self.init(postsService: PostsService())
+        self.init(postsService: RedditService())
     }
     
     public func fetchPosts(subreddit: String?) {
@@ -34,6 +34,6 @@ class PostsViewModel: PostViewable {
     }
     
     private func setPosts(response: RedditResponse) {
-        posts.accept(response.data.posts)
+        posts.accept(response.posts)
     }
 }

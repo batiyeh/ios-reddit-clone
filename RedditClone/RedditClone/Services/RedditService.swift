@@ -10,12 +10,12 @@ import Foundation
 
 public typealias ServiceCompletion = (_ response: RedditResponse) -> Void
 
-public protocol PostsServicable {
+public protocol RedditServicable {
     func getHomePosts(completionHandler: @escaping ServiceCompletion)
     func getSubredditPosts(subreddit: String, completionHandler: @escaping ServiceCompletion)
 }
 
-class PostsService: PostsServicable {
+class RedditService: RedditServicable {
     let baseUrl = "https://www.reddit.com/"
     let json = ".json"
     

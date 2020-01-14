@@ -16,7 +16,7 @@ public protocol PostsTableViewDelegate: class {
 class PostsTableViewDataManager: NSObject, UITableViewDelegate, UITableViewDataSource {
     public weak var delegate: PostsTableViewDelegate?
     private weak var tableView: UITableView?
-    private var posts: [PostModel] = []
+    private var posts: [Post] = []
     private let disposeBag = DisposeBag()
     
     public override init() {
@@ -32,7 +32,7 @@ class PostsTableViewDataManager: NSObject, UITableViewDelegate, UITableViewDataS
         tableView.delegate = self
     }
     
-    public func setPosts(posts: [PostModel]) {
+    public func setPosts(posts: [Post]) {
         self.posts = posts
         tableView?.reloadData()
     }
@@ -57,13 +57,13 @@ class PostsTableViewDataManager: NSObject, UITableViewDelegate, UITableViewDataS
             else { return PostTableViewCell() }
         
         let post = posts[indexPath.row]
-        cell.configure(post: post.data)
-        if let thumbnail = post.data.thumbnail {
+        cell.configure(post: post)
+        if let thumbnail = post.thumbnail {
             cell.thumbnail.downloadImageFrom(urlString: thumbnail, contentMode: .scaleAspectFit)
         }
         
         cell.tapped.subscribe(onNext: { [weak self] _ in
-            self?.delegate?.postTapped(url: post.data.url)
+            self?.delegate?.postTapped(url: post.url)
         }).disposed(by: disposeBag)
         return cell
     }

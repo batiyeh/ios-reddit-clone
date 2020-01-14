@@ -64,7 +64,7 @@ class PostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func configure(post: SinglePostModel, isTappable: Bool = true) {
+    public func configure(post: Post, isTappable: Bool = true) {
         titleLabel.text = post.title
         subredditLabel.text = "r/\(post.subreddit)"
         
