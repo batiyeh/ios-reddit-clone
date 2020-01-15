@@ -12,12 +12,16 @@ enum PostsEndpoint: Endpoint {
     case home
     case subreddit(subreddit: String)
     
+    var baseUrl: String {
+        return "https://www.reddit.com/"
+    }
+    
     var method: HttpMethod {
         switch self {
         case .home:
-            return .get
+            return .GET
         case .subreddit:
-            return .get
+            return .GET
         }
     }
     

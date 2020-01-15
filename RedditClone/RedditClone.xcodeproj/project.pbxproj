@@ -22,7 +22,7 @@
 		012FB0B42328703A005F69B9 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012FB0B32328703A005F69B9 /* PostTableViewCell.swift */; };
 		012FB0B723287451005F69B9 /* PostsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012FB0B623287451005F69B9 /* PostsView.swift */; };
 		012FB0B923287788005F69B9 /* RedditResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012FB0B823287788005F69B9 /* RedditResponse.swift */; };
-		012FB0BC23294812005F69B9 /* RedditService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012FB0BB23294812005F69B9 /* RedditService.swift */; };
+		012FB0BC23294812005F69B9 /* PostsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 012FB0BB23294812005F69B9 /* PostsService.swift */; };
 		0162DC7F23CEA224006CE5B0 /* PostsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0162DC7E23CEA224006CE5B0 /* PostsEndpoint.swift */; };
 		01CF99EC23C9794F007457B8 /* UIImageView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF99EB23C9794F007457B8 /* UIImageView+Extensions.swift */; };
 		01CF99EE23CA9F0F007457B8 /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01CF99ED23CA9F0F007457B8 /* UITextField+Extensions.swift */; };
@@ -75,7 +75,7 @@
 		012FB0B32328703A005F69B9 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		012FB0B623287451005F69B9 /* PostsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsView.swift; sourceTree = "<group>"; };
 		012FB0B823287788005F69B9 /* RedditResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditResponse.swift; sourceTree = "<group>"; };
-		012FB0BB23294812005F69B9 /* RedditService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditService.swift; sourceTree = "<group>"; };
+		012FB0BB23294812005F69B9 /* PostsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsService.swift; sourceTree = "<group>"; };
 		0162DC7E23CEA224006CE5B0 /* PostsEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsEndpoint.swift; sourceTree = "<group>"; };
 		01CF99EB23C9794F007457B8 /* UIImageView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Extensions.swift"; sourceTree = "<group>"; };
 		01CF99ED23CA9F0F007457B8 /* UITextField+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
@@ -255,7 +255,7 @@
 		012FB0BA232947FA005F69B9 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				012FB0BB23294812005F69B9 /* RedditService.swift */,
+				012FB0BB23294812005F69B9 /* PostsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -263,6 +263,7 @@
 		0162DC7B23CD69F4006CE5B0 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				01CF99F823CD2AD3007457B8 /* Endpoint.swift */,
 				01CF99F523CC0B28007457B8 /* Networking.swift */,
 				012FB0BA232947FA005F69B9 /* Services */,
 				01CF99F723CD2AB6007457B8 /* Endpoints */,
@@ -273,7 +274,6 @@
 		01CF99F723CD2AB6007457B8 /* Endpoints */ = {
 			isa = PBXGroup;
 			children = (
-				01CF99F823CD2AD3007457B8 /* Endpoint.swift */,
 				0162DC7E23CEA224006CE5B0 /* PostsEndpoint.swift */,
 			);
 			path = Endpoints;
@@ -522,7 +522,7 @@
 				012FB0AE232869E9005F69B9 /* UINavigationController+Extensions.swift in Sources */,
 				012FB0B123286BFE005F69B9 /* PostsDataManager.swift in Sources */,
 				012FB0B923287788005F69B9 /* RedditResponse.swift in Sources */,
-				012FB0BC23294812005F69B9 /* RedditService.swift in Sources */,
+				012FB0BC23294812005F69B9 /* PostsService.swift in Sources */,
 				012FB0B42328703A005F69B9 /* PostTableViewCell.swift in Sources */,
 				0162DC7F23CEA224006CE5B0 /* PostsEndpoint.swift in Sources */,
 				01CF99F223CBDCA9007457B8 /* UIViewController+Extensions.swift in Sources */,

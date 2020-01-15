@@ -7,30 +7,43 @@
 //
 
 import Foundation
+import RxSwift
 
-enum HttpMethod {
-    case get
+public enum NetworkError: Error {
+    case badUrl
 }
 
-typealias NetworkingResult<Value> = (Result<Value, Error>) -> Void
-
 protocol Networkable {
-    func request<T: Endpoint>(_ endpoint: T, completion: @escaping NetworkingResult<T.Response>)
+    func request<T: Decodable>(request: URLRequest?) -> Observable<T>
 }
 
 class Networking: Networkable {
-    func request<T>(_ endpoint: T, completion: @escaping (Result<T.Response, Error>) -> Void) where T: Endpoint {
-        URLSession.shared.dataTask(with: endpoint.buildUrl()) { (data, urlResponse, error) in
-            if let data = data,
-                let jsonString = String(data: data, encoding: .utf8) {
-                if let response = try? JSONDecoder().decode(T.Response.self, from: jsonString.data(using: .utf8)!) {
-                    completion(.success(response))
-                } else if let error = error {
-                    completion(.failure(error))
+    func request<T: Decodable>(request: URLRequest?) -> Observable<T> {
+        return Observable<T>.create { observer in
+            if let request = request {
+                let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+                    do {
+                        if let data = data {
+                            let model: T = try JSONDecoder().decode(T.self, from: data)
+                            observer.onNext(model)
+                        } else if let error = error {
+                            observer.onError(error)
+                        }
+                    } catch let error {
+                        observer.onError(error)
+                    }
+                    
+                    observer.onCompleted()
                 }
-            } else if let error = error {
-                completion(.failure(error))
+                task.resume()
+                return Disposables.create {
+                    task.cancel()
+                }
+            } else {
+                observer.onError(NetworkError.badUrl)
+                observer.onCompleted()
+                return Disposables.create()
             }
-        }.resume()
+        }
     }
 }
