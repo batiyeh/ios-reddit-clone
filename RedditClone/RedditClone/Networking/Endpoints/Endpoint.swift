@@ -8,30 +8,11 @@
 
 import Foundation
 
-//protocol Networkable {
-//    var method: HttpMethod { get }
-//    var baseUrl: String { get }
-//    var path: String { get }
-//}
-
-//class EndpointType<Response> {
-//    let method: HttpMethod
-//    let path: String
-//    let decode: (Data) throws -> Response
-//
-//    init(method: HttpMethod,
-//         path: String,
-//         decode: @escaping (Data) throws -> Response) {
-//        self.method = method
-//        self.path = path
-//        self.decode = decode
-//    }
-//}
-//
-//extension EndpointType where Response: Decodable {
-//    convenience init(method: HttpMethod, path: String) {
-//        self.init(method: method, path: path) {
-//            try JSONDecoder().decode(Response.self, from: $0)
-//        }
-//    }
-//}
+protocol Endpoint: Encodable {
+    associatedtype Response: Decodable
+    var method: HttpMethod { get }
+    var baseUrl: String { get }
+    var path: String { get }
+    
+    func buildUrl() -> URL
+}

@@ -18,31 +18,19 @@ protocol Networkable {
     func request<T: Endpoint>(_ endpoint: T, completion: @escaping NetworkingResult<T.Response>)
 }
 
-protocol Endpoint: Encodable {
-    associatedtype Response: Decodable
-    var method: HttpMethod { get }
-    var baseUrl: String { get }
-    var path: String { get }
-}
-
 class Networking: Networkable {
     func request<T>(_ endpoint: T, completion: @escaping (Result<T.Response, Error>) -> Void) where T: Endpoint {
-        let url = buildUrl(endpoint)
-        URLSession.shared.dataTask(with: url) { (data, urlResponse, error) in
+        URLSession.shared.dataTask(with: endpoint.buildUrl()) { (data, urlResponse, error) in
             if let data = data,
                 let jsonString = String(data: data, encoding: .utf8) {
                 if let response = try? JSONDecoder().decode(T.Response.self, from: jsonString.data(using: .utf8)!) {
-                    completion(.success(T.Response))
-                } else {
+                    completion(.success(response))
+                } else if let error = error {
                     completion(.failure(error))
                 }
-            } else {
+            } else if let error = error {
                 completion(.failure(error))
             }
         }.resume()
-    }
-    
-    private func buildUrl<T>(_ endpoint: T) -> URL where T: Endpoint {
-        print(endpoint.baseUrl)
     }
 }
