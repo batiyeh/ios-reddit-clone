@@ -12,4 +12,5 @@ import Foundation
 // like fonts, colors, views, and images
 public struct Factory {
     public static var views = Views()
+    public static var colors = Colors()
 }

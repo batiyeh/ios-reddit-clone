@@ -30,8 +30,8 @@ public class PostsView: UIView {
     }
     
     private func setupSearchField() {
-        let lightGray = UIColor(red: 242/255, green: 242/255, blue: 242/255, alpha: 1.0)
-        let darkGray = UIColor(red: 180/255, green: 180/255, blue: 180/255, alpha: 1.0)
+        let lightGray = Factory.colors.lightGray
+        let darkGray = Factory.colors.darkGray
         
         addSubview(searchTextField)
         searchTextField.backgroundColor = lightGray

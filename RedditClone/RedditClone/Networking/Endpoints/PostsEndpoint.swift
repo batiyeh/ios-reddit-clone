@@ -30,7 +30,7 @@ enum PostsEndpoint: Endpoint {
         case .home:
             return ".json"
         case .subreddit(let subreddit):
-            return "/r/" + subreddit + "/.json"
+            return "r/" + subreddit + "/.json"
         }
     }
 }

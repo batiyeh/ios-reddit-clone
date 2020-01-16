@@ -6,15 +6,12 @@
 //  Copyright © 2019 Brian Atiyeh. All rights reserved.
 //
 
-import RxSwift
 import SnapKit
 import UIKit
 
 class PostTableViewCell: UITableViewCell {
-    public var tapped = PublishSubject<UITapGestureRecognizer>()
     private let verticalMargin: CGFloat = 25.0
     private let horizontalMargin: CGFloat = 20.0
-    private let disposeBag = DisposeBag()
     
     lazy var view = UIView()
     lazy var titleLabel: UILabel = {
@@ -64,25 +61,14 @@ class PostTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func configure(post: Post, isTappable: Bool = true) {
+    public func configure(post: Post) {
         titleLabel.text = post.title
         subredditLabel.text = "r/\(post.subreddit)"
-        
-        if isTappable {
-            addTapGesture()
-        }
-    }
-    
-    private func addTapGesture() {
-        let tap = UITapGestureRecognizer()
-        self.isUserInteractionEnabled = true
-        self.addGestureRecognizer(tap)
-        tap.rx.event.bind(to: tapped).disposed(by: disposeBag)
     }
     
     private func layoutView() {
         thumbnailWrapper.addSubview(thumbnail)
-        thumbnail.center = CGPoint(x: thumbnailWrapper.bounds.size.width  / 2,
+        thumbnail.center = CGPoint(x: thumbnailWrapper.bounds.size.width / 2,
                                    y: thumbnailWrapper.bounds.size.height / 2)
         
         verticalStackView.addArrangedSubview(titleLabel)

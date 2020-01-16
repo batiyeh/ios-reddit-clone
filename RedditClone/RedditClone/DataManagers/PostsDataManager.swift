@@ -27,6 +27,7 @@ class PostsTableViewDataManager: NSObject, UITableViewDelegate, UITableViewDataS
         self.tableView = tableView
         tableView.rowHeight = UITableView.automaticDimension
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: String(describing: PostTableViewCell.self))
+        tableView.allowsSelection = true
         tableView.tableFooterView = UIView()
         tableView.dataSource = self
         tableView.delegate = self
@@ -34,12 +35,16 @@ class PostsTableViewDataManager: NSObject, UITableViewDelegate, UITableViewDataS
     
     public func setPosts(posts: [Post]) {
         self.posts = posts
-        tableView?.reloadData()
+        DispatchQueue.main.async {
+            self.tableView?.reloadData()
+        }
     }
     
     public func clearResults() {
         posts = []
-        tableView?.reloadData()
+        DispatchQueue.main.async {
+            self.tableView?.reloadData()
+        }
     }
     
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -62,13 +67,15 @@ class PostsTableViewDataManager: NSObject, UITableViewDelegate, UITableViewDataS
             cell.thumbnail.downloadImageFrom(urlString: thumbnail, contentMode: .scaleAspectFit)
         }
         
-        cell.tapped.subscribe(onNext: { [weak self] _ in
-            self?.delegate?.postTapped(url: post.url)
-        }).disposed(by: disposeBag)
         return cell
     }
     
     public func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
+    }
+    
+    public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let post = posts[indexPath.row]
+        self.delegate?.postTapped(url: post.url)
     }
 }

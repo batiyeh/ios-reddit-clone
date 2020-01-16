@@ -15,14 +15,13 @@ class PostsViewController: UIViewController {
     let postsViewModel: PostViewable
     let postsDataManager: PostsTableViewDataManager
     let postsView = PostsView()
-    var popularSubredditsVC: PopularSubredditsViewController?
+    var subredditsViewController: SubredditsViewController?
     private let disposeBag = DisposeBag()
     
     init(postsViewModel: PostViewable,
          postsDataManager: PostsTableViewDataManager) {
         self.postsViewModel = postsViewModel
         self.postsDataManager = postsDataManager
-        self.postsDataManager.setup(tableView: postsView.tableView)
         super.init(nibName: nil, bundle: nil)
         self.postsDataManager.delegate = self
     }
@@ -38,6 +37,7 @@ class PostsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.postsDataManager.setup(tableView: postsView.tableView)
         postsObservable()
         postsViewModel.fetchPosts(subreddit: nil)
     }
@@ -52,6 +52,12 @@ class PostsViewController: UIViewController {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] posts in
                 self?.postsDataManager.setPosts(posts: posts)
+        }).disposed(by: disposeBag)
+        
+        postsViewModel.pageTitle
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (title) in
+            self?.title = title
         }).disposed(by: disposeBag)
     }
     
@@ -91,8 +97,8 @@ class PostsViewController: UIViewController {
     }
     
     private func setupPopularSubredditsView() {
-        popularSubredditsVC = PopularSubredditsViewController()
-        if let popularSubreddits = popularSubredditsVC {
+        subredditsViewController = SubredditsViewController()
+        if let popularSubreddits = subredditsViewController {
             add(childViewController: popularSubreddits)
             popularSubreddits.view.snp.makeConstraints { (make) in
                 make.top.equalTo(postsView.searchTextField.snp.bottom).offset(10)
@@ -102,9 +108,9 @@ class PostsViewController: UIViewController {
     }
     
     private func removePopularSubredditsView() {
-        if let popularSubreddits = popularSubredditsVC {
+        if let popularSubreddits = subredditsViewController {
             remove(childViewController: popularSubreddits)
-            popularSubredditsVC = nil
+            subredditsViewController = nil
         }
     }
 }

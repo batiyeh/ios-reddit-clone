@@ -11,6 +11,7 @@ import UIKit
 
 extension UIImageView {
     // Trivial solution for loading in images and there are a couple issues with it.
+    // Images may be placed in the wrong cell if the cell is reused before the new image can be downloaded
     func downloadImageFrom(urlString: String, contentMode: UIView.ContentMode) {
         if let url = URL(string: urlString) {
             URLSession.shared.dataTask(with: url, completionHandler: { [weak self] (data, response, error) -> Void in

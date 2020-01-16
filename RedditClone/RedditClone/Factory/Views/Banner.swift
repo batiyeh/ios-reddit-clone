@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SnapKit
 import UIKit
 
 public enum BannerType {
@@ -37,9 +38,24 @@ public class Banner: UIView {
         return label
     }()
     
-    public var bannerStripe = UIView()
-    
     private func setupView() {
+        addSubview(banner)
+        banner.addSubview(textLabel)
         
+        textLabel.text = text
+        textLabel.textColor = .white
+        banner.backgroundColor = .red
+        
+        banner.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().offset(25)
+            make.trailing.equalToSuperview().inset(25)
+            make.top.equalToSuperview().offset(20)
+        }
+        
+        textLabel.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().offset(15)
+            make.trailing.equalToSuperview().inset(15)
+            make.top.equalToSuperview().offset(10)
+        }
     }
 }

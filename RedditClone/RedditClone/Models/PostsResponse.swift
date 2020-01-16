@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct RedditResponse: Decodable {
+public struct PostsResponse: Decodable {
     let posts: [Post]
     
     enum CodingKeys: String, CodingKey {
