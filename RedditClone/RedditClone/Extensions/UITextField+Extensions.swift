@@ -10,6 +10,8 @@ import Foundation
 import SnapKit
 import UIKit
 
+typealias DoneButtonAction = () -> Void
+
 extension UITextField {
     func setPaddingPoints(left: CGFloat?, right: CGFloat?){
         if let leftPadding = left {

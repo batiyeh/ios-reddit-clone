@@ -11,11 +11,13 @@ import RxCocoa
 
 public protocol PostViewable {
     var posts: BehaviorRelay<[Post]> { get }
+    var showBanner: BehaviorRelay<Bool> { get }
     func fetchPosts(subreddit: String?)
 }
 
 class PostsViewModel: PostViewable {
     public var posts = BehaviorRelay<[Post]>(value: [])
+    public var showBanner = BehaviorRelay<Bool>(value: false)
     let postsService: PostsServicable
     let disposeBag = DisposeBag()
     
@@ -30,8 +32,8 @@ class PostsViewModel: PostViewable {
     public func fetchPosts(subreddit: String?) {
         postsService.getPosts(subreddit: subreddit).subscribe(onNext: { [weak self] (response) in
             self?.posts.accept(response.posts)
-        }, onError: { (error) in
-            print("error!")
+        }, onError: { [weak self] (error) in
+            self?.showBanner.accept(true)
         }).disposed(by: disposeBag)
     }
     

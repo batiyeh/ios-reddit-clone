@@ -55,6 +55,11 @@ class PostsViewController: UIViewController {
         }).disposed(by: disposeBag)
     }
     
+    @objc private func doneButtonPressed() {
+        postsView.searchTextField.resignFirstResponder()
+        postsViewModel.fetchPosts(subreddit: postsView.searchTextField.text)
+    }
+    
     private func setupNavigationBar() {
         title = "Reddit Home"
         navigationController?.styleNavigationBarTitle()
@@ -65,11 +70,24 @@ class PostsViewController: UIViewController {
         view.backgroundColor = .white
         
         view.addSubview(postsView)
-        self.postsView.searchTextField.delegate = self
+        setupSearchTextField()
         postsView.snp.makeConstraints { (make) in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.leading.trailing.bottom.equalToSuperview()
         }
+    }
+    
+    private func setupSearchTextField() {
+        postsView.searchTextField.delegate = self
+        
+        let flexSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let done: UIBarButtonItem = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneButtonPressed))
+        let items = [flexSpace, done]
+        let doneToolbar: UIToolbar = UIToolbar(frame: CGRect.init(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+        doneToolbar.barStyle = .default
+        doneToolbar.items = items
+        doneToolbar.sizeToFit()
+        self.postsView.searchTextField.inputAccessoryView = doneToolbar
     }
     
     private func setupPopularSubredditsView() {
