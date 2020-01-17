@@ -25,4 +25,9 @@ extension UIViewController {
             childViewController.removeFromParent()
         }
     }
+    
+    public func showErrorBanner(errorMessage: String, dismissDuration: TimeInterval = 5.0) {
+        let banner = Factory.views.banner(type: .error, text: errorMessage)
+        banner.show(superview: view, dismissDuration: dismissDuration)
+    }
 }

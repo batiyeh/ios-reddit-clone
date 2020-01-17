@@ -37,14 +37,10 @@ class PostsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.postsDataManager.setup(tableView: postsView.tableView)
-        postsObservable()
-        postsViewModel.fetchPosts(subreddit: nil)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
         setupView()
+        postsObservable()
+        self.postsDataManager.setup(tableView: postsView.tableView)
+        postsViewModel.fetchPosts(subreddit: nil)
     }
     
     private func postsObservable() {
@@ -58,6 +54,12 @@ class PostsViewController: UIViewController {
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] (title) in
             self?.title = title
+        }).disposed(by: disposeBag)
+        
+        postsViewModel.showBanner.observeOn(MainScheduler.instance).subscribe(onNext: { [weak self] (showBanner) in
+            if showBanner {
+                self?.showErrorBanner(errorMessage: "Error fetching posts from Reddit")
+            }
         }).disposed(by: disposeBag)
     }
     
