@@ -33,6 +33,11 @@
 		0171D28923D37A5C0078C660 /* SubredditsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0171D28823D37A5C0078C660 /* SubredditsServiceTests.swift */; };
 		0171D28B23D37B880078C660 /* MockSubredditsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0171D28A23D37B880078C660 /* MockSubredditsViewModel.swift */; };
 		0171D28D23D37BF70078C660 /* SubredditsViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0171D28C23D37BF70078C660 /* SubredditsViewControllerTests.swift */; };
+		0171D29123D3AFCF0078C660 /* HomeScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0171D29023D3AFCF0078C660 /* HomeScreen.swift */; };
+		0171D29323D3AFF10078C660 /* UITestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0171D29223D3AFF10078C660 /* UITestFactory.swift */; };
+		0171D29523D3B40C0078C660 /* SubredditScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0171D29423D3B40C0078C660 /* SubredditScreen.swift */; };
+		0171D29823D3B5410078C660 /* UITestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0171D29723D3B5410078C660 /* UITestHelpers.swift */; };
+		0171D29A23D3B5BB0078C660 /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0171D29923D3B5BB0078C660 /* App.swift */; };
 		018B96A723D0ABD30093D047 /* SubredditsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B96A623D0ABD30093D047 /* SubredditsViewModel.swift */; };
 		018B96A923D0ADF40093D047 /* SubredditsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B96A823D0ADF40093D047 /* SubredditsService.swift */; };
 		018B96AB23D0B5870093D047 /* SubredditsEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 018B96AA23D0B5870093D047 /* SubredditsEndpoint.swift */; };
@@ -108,6 +113,11 @@
 		0171D28823D37A5C0078C660 /* SubredditsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubredditsServiceTests.swift; sourceTree = "<group>"; };
 		0171D28A23D37B880078C660 /* MockSubredditsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSubredditsViewModel.swift; sourceTree = "<group>"; };
 		0171D28C23D37BF70078C660 /* SubredditsViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubredditsViewControllerTests.swift; sourceTree = "<group>"; };
+		0171D29023D3AFCF0078C660 /* HomeScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreen.swift; sourceTree = "<group>"; };
+		0171D29223D3AFF10078C660 /* UITestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestFactory.swift; sourceTree = "<group>"; };
+		0171D29423D3B40C0078C660 /* SubredditScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubredditScreen.swift; sourceTree = "<group>"; };
+		0171D29723D3B5410078C660 /* UITestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITestHelpers.swift; sourceTree = "<group>"; };
+		0171D29923D3B5BB0078C660 /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		018B96A623D0ABD30093D047 /* SubredditsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubredditsViewModel.swift; sourceTree = "<group>"; };
 		018B96A823D0ADF40093D047 /* SubredditsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubredditsService.swift; sourceTree = "<group>"; };
 		018B96AA23D0B5870093D047 /* SubredditsEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubredditsEndpoint.swift; sourceTree = "<group>"; };
@@ -225,6 +235,8 @@
 		012FB0932327F9FB005F69B9 /* RedditCloneUITests */ = {
 			isa = PBXGroup;
 			children = (
+				0171D29623D3B5340078C660 /* UITestHelpers */,
+				0171D28E23D3AFAB0078C660 /* UITestFactory */,
 				012FB0942327F9FB005F69B9 /* RedditCloneUITests.swift */,
 				012FB0962327F9FB005F69B9 /* Info.plist */,
 			);
@@ -340,6 +352,33 @@
 				0171D27D23D36E670078C660 /* HomeCoordinatorTests.swift */,
 			);
 			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		0171D28E23D3AFAB0078C660 /* UITestFactory */ = {
+			isa = PBXGroup;
+			children = (
+				0171D28F23D3AFBF0078C660 /* Screens */,
+				0171D29223D3AFF10078C660 /* UITestFactory.swift */,
+			);
+			path = UITestFactory;
+			sourceTree = "<group>";
+		};
+		0171D28F23D3AFBF0078C660 /* Screens */ = {
+			isa = PBXGroup;
+			children = (
+				0171D29023D3AFCF0078C660 /* HomeScreen.swift */,
+				0171D29423D3B40C0078C660 /* SubredditScreen.swift */,
+			);
+			path = Screens;
+			sourceTree = "<group>";
+		};
+		0171D29623D3B5340078C660 /* UITestHelpers */ = {
+			isa = PBXGroup;
+			children = (
+				0171D29723D3B5410078C660 /* UITestHelpers.swift */,
+				0171D29923D3B5BB0078C660 /* App.swift */,
+			);
+			path = UITestHelpers;
 			sourceTree = "<group>";
 		};
 		018B96B423D28BEC0093D047 /* ViewModels */ = {
@@ -695,6 +734,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0171D29323D3AFF10078C660 /* UITestFactory.swift in Sources */,
+				0171D29123D3AFCF0078C660 /* HomeScreen.swift in Sources */,
+				0171D29523D3B40C0078C660 /* SubredditScreen.swift in Sources */,
+				0171D29A23D3B5BB0078C660 /* App.swift in Sources */,
+				0171D29823D3B5410078C660 /* UITestHelpers.swift in Sources */,
 				012FB0952327F9FB005F69B9 /* RedditCloneUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
