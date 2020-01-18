@@ -9,27 +9,27 @@
 import SafariServices
 import UIKit
 
-public protocol MainCoordinatorDelegate: class {
+public protocol HomeCoordinatorDelegate: class {
     func showPost(url: String)
 }
 
-class MainCoordinator: Coordinator, MainCoordinatorDelegate {
+class HomeCoordinator: Coordinator, HomeCoordinatorDelegate {
     var childCoordinators = [Coordinator]()
-    var navigationController: UINavigationController
+    let router: Routable
     
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
+    init(router: Routable) {
+        self.router = router
     }
     
     func start() {
         let postsViewController = PostsViewController()
         postsViewController.delegate = self
-        navigationController.pushViewController(postsViewController, animated: false)
+        router.push(viewController: postsViewController, animated: false)
     }
     
     public func showPost(url: String) {
         guard let url = URL(string: url) else { return }
         let sfViewController = SFSafariViewController(url: url)
-        navigationController.present(sfViewController, animated: true)
+        router.present(viewController: sfViewController, animated: true)
     }
 }

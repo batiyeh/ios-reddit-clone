@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-protocol SubredditServicable {
+public protocol SubredditServicable {
     func getPopularSubreddits() -> Observable<SubredditResponse>
 }
 
@@ -24,7 +24,7 @@ public class SubredditService: SubredditServicable {
         self.init(networking: Networking())
     }
     
-    func getPopularSubreddits() -> Observable<SubredditResponse> {
+    public func getPopularSubreddits() -> Observable<SubredditResponse> {
         let endpoint = SubredditsEndpoint.popularEndpoints
         return networking.request(request: endpoint.buildUrlRequest())
     }

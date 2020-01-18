@@ -41,8 +41,8 @@ class SubredditsViewController: UIViewController {
     private func setupSubredditsObservable() {
         subredditsViewModel.popularSubreddits
             .observeOn(MainScheduler.instance)
-            .subscribe(onNext: { [weak self] subreddits in
-                // TODO: Assign subreddits to a data manager & display
+            .subscribe(onNext: { subreddits in
+                // TODO: Assign subreddits to a data manager & display. This would end up being [weak self] once I use self here.
                 print(subreddits)
         }).disposed(by: disposeBag)
     }

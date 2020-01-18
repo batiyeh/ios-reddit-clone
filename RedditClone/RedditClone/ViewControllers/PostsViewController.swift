@@ -11,7 +11,7 @@ import SnapKit
 import UIKit
 
 class PostsViewController: UIViewController {
-    public weak var delegate: MainCoordinatorDelegate?
+    public weak var delegate: HomeCoordinatorDelegate?
     let postsViewModel: PostsViewable
     let postsDataManager: PostsTableViewDataManager
     let postsView = PostsView()

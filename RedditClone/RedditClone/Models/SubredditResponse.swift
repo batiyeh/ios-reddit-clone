@@ -39,4 +39,8 @@ public struct SubredditResponse: Decodable {
         }
         self.subreddits = subredditArray
     }
+    
+    public init(subreddits: [Subreddit]) {
+        self.subreddits = subreddits
+    }
 }
