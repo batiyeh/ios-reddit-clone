@@ -9,7 +9,7 @@
 import Foundation
 import RxSwift
 
-protocol PostsServicable {
+public protocol PostsServicable {
     func getPosts(subreddit: String?) -> Observable<PostsResponse>
 }
 

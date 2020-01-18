@@ -62,6 +62,7 @@ class PostTableViewCell: UITableViewCell {
     }
     
     public func configure(post: Post) {
+        // TODO: The occasional &amp; showing up in titles can be fixed by making this attributedText and converting html string
         titleLabel.text = post.title
         subredditLabel.text = "r/\(post.subreddit)"
     }

@@ -43,4 +43,8 @@ public struct PostsResponse: Decodable {
         }
         self.posts = postsArray
     }
+    
+    public init(posts: [Post]) {
+        self.posts = posts
+    }
 }

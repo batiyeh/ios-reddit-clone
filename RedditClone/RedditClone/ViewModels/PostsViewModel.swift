@@ -9,14 +9,14 @@
 import RxSwift
 import RxCocoa
 
-public protocol PostViewable {
+public protocol PostsViewable {
     var posts: BehaviorRelay<[Post]> { get }
     var showBanner: BehaviorRelay<Bool> { get }
     var pageTitle: BehaviorRelay<String> { get }
     func fetchPosts(subreddit: String?)
 }
 
-class PostsViewModel: PostViewable {
+class PostsViewModel: PostsViewable {
     public var posts = BehaviorRelay<[Post]>(value: [])
     public var showBanner = BehaviorRelay<Bool>(value: false)
     public var pageTitle = BehaviorRelay<String>(value: "Reddit Home")

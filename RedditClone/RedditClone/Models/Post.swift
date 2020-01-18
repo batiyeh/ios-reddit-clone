@@ -22,4 +22,16 @@ public struct Post: Decodable {
         case id
         case thumbnail
     }
+    
+    public init(title: String,
+                subreddit: String,
+                url: String,
+                id: String,
+                thumbnail: String?) {
+        self.title = title
+        self.subreddit = subreddit
+        self.url = url
+        self.id = id
+        self.thumbnail = thumbnail
+    }
 }

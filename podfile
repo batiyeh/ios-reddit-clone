@@ -1,4 +1,3 @@
-source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '10.0'
 use_frameworks!
 project './RedditClone/RedditClone.xcodeproj'
@@ -10,6 +9,10 @@ target 'RedditClone' do
 end
 
 target 'RedditCloneTests' do
+    pod 'SnapKit', '~> 5.0.0'
+    pod 'RxSwift', '~> 5'
+    pod 'RxCocoa', '~> 5'
     pod 'RxBlocking', '~> 5'
     pod 'RxTest', '~> 5'
+    pod 'Nimble', '~> 8'
 end

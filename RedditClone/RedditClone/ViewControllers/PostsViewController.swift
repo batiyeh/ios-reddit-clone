@@ -12,23 +12,21 @@ import UIKit
 
 class PostsViewController: UIViewController {
     public weak var delegate: MainCoordinatorDelegate?
-    let postsViewModel: PostViewable
+    let postsViewModel: PostsViewable
     let postsDataManager: PostsTableViewDataManager
     let postsView = PostsView()
     var subredditsViewController: SubredditsViewController?
     private let disposeBag = DisposeBag()
     
-    init(postsViewModel: PostViewable,
-         postsDataManager: PostsTableViewDataManager) {
+    init(postsViewModel: PostsViewable) {
         self.postsViewModel = postsViewModel
-        self.postsDataManager = postsDataManager
+        self.postsDataManager = PostsTableViewDataManager()
         super.init(nibName: nil, bundle: nil)
         self.postsDataManager.delegate = self
     }
     
     public convenience init() {
-        self.init(postsViewModel: PostsViewModel(),
-                  postsDataManager: PostsTableViewDataManager())
+        self.init(postsViewModel: PostsViewModel())
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -53,17 +51,19 @@ class PostsViewController: UIViewController {
         postsViewModel.pageTitle
             .observeOn(MainScheduler.instance)
             .subscribe(onNext: { [weak self] (title) in
-            self?.title = title
+                self?.title = title
         }).disposed(by: disposeBag)
         
-        postsViewModel.showBanner.observeOn(MainScheduler.instance).subscribe(onNext: { [weak self] (showBanner) in
-            if showBanner {
-                self?.showErrorBanner(errorMessage: "Error fetching posts from Reddit")
-            }
+        postsViewModel.showBanner
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { [weak self] (showBanner) in
+                if showBanner {
+                    self?.showErrorBanner(errorMessage: "Error fetching posts from Reddit")
+                }
         }).disposed(by: disposeBag)
     }
     
-    @objc private func doneButtonPressed() {
+    @objc func doneButtonPressed() {
         postsView.searchTextField.resignFirstResponder()
         postsViewModel.fetchPosts(subreddit: postsView.searchTextField.text)
     }
