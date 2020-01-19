@@ -8,6 +8,7 @@
 
 import Foundation
 import RxSwift
+import UIKit
 
 public enum NetworkError: Error {
     case badUrl
@@ -15,6 +16,7 @@ public enum NetworkError: Error {
 
 public protocol Networkable {
     func request<T: Decodable>(request: URLRequest?) -> Observable<T>
+    func request(urlString: String) -> Observable<Data>
 }
 
 public class Networking: Networkable {
@@ -27,6 +29,25 @@ public class Networking: Networkable {
                 return self.cancelTask(task: task)
             } else {
                 return self.handleError(observer: observer, error: NetworkError.badUrl)
+            }
+        }
+    }
+    
+    public func request(urlString: String) -> Observable<Data> {
+        return Observable<Data>.create { observer in
+            if let url = URL(string: urlString) {
+                let task = URLSession.shared.dataTask(with: url) { (data, response, error) in
+                    if let data = data {
+                        observer.onNext(data)
+                    } else if let error = error {
+                        observer.onError(error)
+                    }
+                }
+                return self.cancelTask(task: task)
+            } else {
+                observer.onError(NetworkError.badUrl)
+                observer.onCompleted()
+                return Disposables.create()
             }
         }
     }

@@ -14,13 +14,19 @@ public protocol PostsTableViewDelegate: class {
 }
 
 class PostsTableViewDataManager: NSObject, UITableViewDelegate, UITableViewDataSource {
-    public weak var delegate: PostsTableViewDelegate?
     var posts: [Post] = []
+    let networking: Networkable
+    public weak var delegate: PostsTableViewDelegate?
     private weak var tableView: UITableView?
     private let disposeBag = DisposeBag()
     
-    public override init() {
+    public init(networking: Networkable) {
+        self.networking = networking
         super.init()
+    }
+    
+    public convenience override init() {
+        self.init(networking: Networking())
     }
     
     public func setup(tableView: UITableView, editingStyle: UITableViewCell.EditingStyle = .none) {
@@ -63,8 +69,9 @@ class PostsTableViewDataManager: NSObject, UITableViewDelegate, UITableViewDataS
         
         let post = posts[indexPath.row]
         cell.configure(post: post)
+        
         if let thumbnail = post.thumbnail {
-            cell.thumbnail.downloadImageFrom(urlString: thumbnail, contentMode: .scaleAspectFit)
+            fetchImage(urlString: thumbnail, image: cell.thumbnail)
         }
         
         return cell
@@ -77,5 +84,19 @@ class PostsTableViewDataManager: NSObject, UITableViewDelegate, UITableViewDataS
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let post = posts[indexPath.row]
         self.delegate?.postTapped(url: post.url)
+    }
+}
+
+extension PostsTableViewDataManager {
+    /* Trivial solution of loading in images for each cell & there are some issues with it.
+     Images won't update when switching subreddits and images have the potential to be in the
+     wrong places if the cell is reused before its done downloading. */
+    func fetchImage(urlString: String, image: UIImageView) {
+        networking.request(urlString: urlString)
+            .observeOn(MainScheduler.instance)
+            .subscribe(onNext: { (data) in
+                image.image = UIImage(data: data)
+                image.contentMode = .scaleAspectFit
+        }).disposed(by: disposeBag)
     }
 }
