@@ -43,17 +43,17 @@ class PostsViewControllerTests: XCTestCase {
     func testShouldUpdateTitleOnDoneSearching() {
         subject.viewDidLoad()
         mockPostsViewModel.pageTitle.accept("New Title")
-        expect(self.subject.title).to(equal("New Title"))
+        expect(self.subject.title).toEventually(equal("New Title"))
     }
     
     func testShouldUpdatePostsOnFetch() {
         subject.viewDidLoad()
-        expect(self.subject.postsDataManager.posts.count).to(equal(1))
+        expect(self.subject.postsDataManager.posts.count).toEventually(equal(1))
     }
     
     func testShouldShowErrorBannerOnError() {
         subject.viewDidLoad()
         mockPostsViewModel.showBanner.accept(true)
-        expect(self.subject.view.subviews[2]).to(beAnInstanceOf(Banner.self))
+        expect(self.subject.view.subviews[2]).toEventually(beAnInstanceOf(Banner.self))
     }
 }
