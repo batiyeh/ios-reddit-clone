@@ -4,7 +4,8 @@ Built for an interview task.
 
 - View Reddit Home
 - Search For & View Subreddits
-- See popular subreddits
+- Webview For Posts
+- See Popular Subreddits
 
 
 ## Installation
