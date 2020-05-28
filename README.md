@@ -2,6 +2,8 @@
 
 Scalable solution using MVVM + Coordinators. Factory pattern was used to easily access fonts/colors/reusable views. Basic Unit testing and an example UI test is also included.
 
+<img src="https://github.com/batiyeh/reddit-clone/blob/master/screenshots/RedditClone.png" width="150" align="right">
+
 - View Reddit Home
 - Search For & View Subreddits
 - Webview For Posts
