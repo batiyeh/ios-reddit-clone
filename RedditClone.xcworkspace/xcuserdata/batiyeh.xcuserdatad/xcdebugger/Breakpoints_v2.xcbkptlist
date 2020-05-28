@@ -20,5 +20,69 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8F6A3B77-0EC8-4FE0-BF7B-9A4B4455D671"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RedditClone/RedditClone/Services/PostsService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "getPosts(subreddit:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3AA4A42F-8BA3-49A0-AC5B-1143000C540C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RedditClone/RedditClone/Networking/Networking.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "request(request:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "3AA4A42F-8BA3-49A0-AC5B-1143000C540C - 92d9d6d43ce2d140"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (RxSwift.AnyObserver&lt;A&gt;) -&gt; RxSwift.Disposable in RedditClone.Networking.request&lt;A where A: Swift.Decodable&gt;(request: Swift.Optional&lt;Foundation.URLRequest&gt;) -&gt; RxSwift.Observable&lt;A&gt;"
+                  moduleName = "RedditClone"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/batiyeh/Development/ios-reddit-clone/RedditClone/RedditClone/Networking/Networking.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "485">
+               </Location>
+               <Location
+                  uuid = "3AA4A42F-8BA3-49A0-AC5B-1143000C540C - 888432c0438dc162"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in closure #1 (RxSwift.AnyObserver&lt;A&gt;) -&gt; RxSwift.Disposable in RedditClone.Networking.request&lt;A where A: Swift.Decodable&gt;(request: Swift.Optional&lt;Foundation.URLRequest&gt;) -&gt; RxSwift.Observable&lt;A&gt;"
+                  moduleName = "RedditClone"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/batiyeh/Development/ios-reddit-clone/RedditClone/RedditClone/Networking/Networking.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "304">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
