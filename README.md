@@ -1,11 +1,18 @@
-# Reddit Post Viewer
+# iOS Reddit Clone
 
-Built for an interview task.
+Scalable solution using MVVM + Coordinators. Factory pattern was used to easily access fonts/colors/reusable views. Basic Unit testing and an example UI test is also included.
 
 - View Reddit Home
 - Search For & View Subreddits
 - Webview For Posts
 - See Popular Subreddits
+
+
+Todos:
+- [ ] Update popular subreddits view
+- [ ] Separate Factory into its own module
+- [ ] Add integration tests with mock API responses
+- [ ] Add navigation to go back to the Home page without deleting a search
 
 
 ## Installation
